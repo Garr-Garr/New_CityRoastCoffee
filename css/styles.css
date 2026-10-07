@@ -1192,7 +1192,7 @@ h2 em {
 
   .home-masthead { padding-top: calc(var(--header-h) + 2.5rem); }
   .home-masthead-inner { grid-template-columns: 1fr; gap: 2rem; padding-bottom: 2.5rem; }
-  .home-masthead-mark { order: -1; justify-items: start; padding: 0 0 1.5rem; border-bottom: 1px solid var(--color-border); border-left: 0; }
+  .home-masthead-mark { display: none; }
   .home-masthead-mark img { width: 155px; }
   .home-masthead h1 { font-size: clamp(2.65rem, 11vw, 4rem); }
   .home-fact-row { grid-template-columns: 1fr; }
