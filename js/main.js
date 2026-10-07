@@ -5,6 +5,7 @@
      2. Mobile nav toggle (open / close / keyboard dismiss)
      3. Close nav on link click or outside tap
      4. Coffees carousel dots indicator
+     5. Scroll progress bar and reveal-on-scroll
    ============================================================ */
 
 (function () {
@@ -30,8 +31,16 @@
   const navLinks  = menu ? menu.querySelectorAll('a') : [];
 
   // ── 1. Scroll shadow ──────────────────────────────────────
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const progress = document.createElement('div');
+  progress.className = 'scroll-progress';
+  progress.setAttribute('aria-hidden', 'true');
+  header.appendChild(progress);
+
   function onScroll() {
     header.classList.toggle('scrolled', window.scrollY > 8);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(window.scrollY / max, 1) : 0) + ')';
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -111,5 +120,28 @@
     }, { root: grid, threshold: 0.5 });
 
     cards.forEach(function (card) { observer.observe(card); });
+  }
+
+  // ── 5. Reveal on scroll ───────────────────────────────────
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var targets = document.querySelectorAll(
+      'main section:not(.home-masthead):not(.interior-masthead) > .container > *:not(.home-menu-grid), .home-menu-grid article'
+    );
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    targets.forEach(function (el, i) {
+      el.classList.add('js-reveal');
+      if (el.matches('.home-menu-grid article')) {
+        el.style.setProperty('--reveal-delay', (i % 3) * 0.08 + 's');
+      }
+      revealObserver.observe(el);
+    });
   }
 }());

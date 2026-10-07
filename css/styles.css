@@ -1253,3 +1253,62 @@ h2 em {
   .home-masthead .button-row .btn { width: 100%; }
   .interior-masthead h1 br, .interior-visit h2 br { display: none; }
 }
+
+/* ============================================================
+   Motion (disabled for prefers-reduced-motion)
+   ============================================================ */
+.scroll-progress {
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 3px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+.cup-word { position: relative; display: inline-block; }
+.steam { position: absolute; left: 50%; bottom: 100%; width: 1.4em; height: 1em; transform: translateX(-50%); pointer-events: none; }
+.steam i { position: absolute; bottom: 0; width: 3px; height: 0.7em; border-radius: 3px; background: var(--color-accent); opacity: 0; }
+.steam i:nth-child(1) { left: 15%; }
+.steam i:nth-child(2) { left: 48%; }
+.steam i:nth-child(3) { left: 80%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .text-link span { display: inline-block; transition: transform var(--transition); }
+  .text-link:hover span { transform: translateX(4px); }
+
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .home-masthead-copy > *,
+  .interior-masthead .container > * {
+    animation: riseIn 0.7s var(--ease) both;
+  }
+  .home-masthead-copy > :nth-child(2),
+  .interior-masthead .container > :nth-child(2) { animation-delay: 0.1s; }
+  .home-masthead-copy > :nth-child(3),
+  .interior-masthead .container > :nth-child(3) { animation-delay: 0.2s; }
+  .home-masthead-copy > :nth-child(4),
+  .interior-masthead .container > :nth-child(4) { animation-delay: 0.3s; }
+
+  .js-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+  .js-reveal.is-visible { opacity: 1; transform: none; }
+
+  .steam i { animation: steamRise 3.2s ease-out infinite; }
+  .steam i:nth-child(2) { animation-delay: 1s; }
+  .steam i:nth-child(3) { animation-delay: 2s; }
+
+  @keyframes steamRise {
+    0%   { opacity: 0;   transform: translateY(0) scaleY(0.6); }
+    30%  { opacity: 0.4; }
+    100% { opacity: 0;   transform: translateY(-0.6em) translateX(4px) scaleY(1.2); }
+  }
+}
