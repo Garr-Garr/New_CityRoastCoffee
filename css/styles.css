@@ -2,6 +2,7 @@
    CSS Custom Properties
    ============================================================ */
 :root {
+  color-scheme: only light;
   --color-primary:    #7D1A22;
   --color-accent:     #C4392B;
   --color-bg:         #F5F0E8;
@@ -856,7 +857,7 @@ h2 em {
   padding: 1.5rem;
 }
 
-.home-menu-grid article + article { border-left: 1px solid var(--color-border); }
+.home-menu-grid article + article { border-left: 0; }
 
 .home-menu-number {
   margin-bottom: 2.75rem;
@@ -1218,6 +1219,7 @@ h2 em {
   .interior-visit { padding-block: 3rem; }
   .interior-visit-inner { grid-template-columns: 1fr; gap: 1.25rem; }
   .tea-list article + article, .contact-options-grid a + a { border-top: 1px solid var(--color-border); border-left: 0; padding-left: 0; }
+  .contact-options-grid a:first-child { padding-left: 0; }
 
   .footer-inner     { flex-direction: column; text-align: center; }
   .footer-brand     { flex-direction: column; }
