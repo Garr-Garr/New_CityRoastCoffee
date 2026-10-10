@@ -1071,6 +1071,7 @@ h2 em {
 .menu-category p, .tea-list p { color: var(--color-muted); font-size: 0.9rem; }
 .menu-category ul { margin-top: 1rem; }
 .menu-category li { border-top: 1px solid var(--color-border); padding: 0.45rem 0; color: var(--color-muted); font-size: 0.82rem; }
+.menu-note { margin-top: 1.5rem; color: var(--color-muted); font-size: 0.9rem; }
 .tea-list { border-top: 2px solid var(--color-primary); }
 .tea-list article { border-top: 0; padding: 1.25rem 0; }
 .tea-list article + article { border-left: 1px solid var(--color-border); padding-left: 1.5rem; }
